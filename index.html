@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sellam Abdelmoula — Web Developer & Digital Projects Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Cairo:wght@400;700;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0C0D10;--ink:#EFECE6;--mut:#8F8D96;--line:#ffffff1f;--pn:#15171C;--ac:#FF5B1F;--bl:#9DB7FF;--f:"Space Grotesk","Cairo",system-ui,sans-serif;--m:"JetBrains Mono",ui-monospace,monospace}
+[data-theme=light]{--bg:#EFECE6;--ink:#0C0D10;--mut:#5B5960;--line:#0c0d1b26;--pn:#E3DFD6;--ac:#E8470C;--bl:#3558C8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--f);overflow-x:hidden;transition:background .6s,color .6s}
+[dir=rtl]{--f:"Cairo","Space Grotesk",sans-serif}
+body:before{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.07;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:4px}
+.mono{font:400 12px/1.4 var(--m);letter-spacing:.06em;color:var(--mut)}
+[dir=rtl] .mono{font-family:var(--f);letter-spacing:0;font-size:13px}
+.wrap{max-width:1320px;margin:auto;padding:0 clamp(18px,4vw,48px)}
+/* preloader */
+#pre{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--bg);display:grid;place-content:center;gap:6px;transition:transform .9s cubic-bezier(.77,0,.18,1)}
+#pre b{font-size:clamp(40px,9vw,110px);line-height:.9;letter-spacing:-.04em;display:block}
+#pre .mono{color:var(--bg);opacity:.7;margin-top:18px;display:flex;gap:18px}
+body.ready #pre{transform:translateY(-101%)}
+/* cursor */
+#cur{position:fixed;top:0;left:0;z-index:90;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--ac);pointer-events:none;display:none;place-items:center;font:700 10px var(--m);color:#fff;transition:width .25s,height .25s,margin .25s}
+#cur.on{width:76px;height:76px;margin:-38px 0 0 -38px}
+@media(pointer:fine){#cur{display:grid}}
+/* chrome */
+#prog{position:fixed;top:0;inset-inline:0;height:3px;background:var(--ac);transform:scaleX(0);transform-origin:left;z-index:70}
+[dir=rtl] #prog{transform-origin:right}
+header{position:fixed;top:14px;inset-inline:0;z-index:50;display:flex;justify-content:center;pointer-events:none}
+.pill{pointer-events:auto;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line)}
+.pill a,.pill button{padding:8px 15px;border-radius:999px;font-size:14px;transition:background .3s,color .3s}
+.pill a:hover,.pill a.act{background:var(--ink);color:var(--bg)}
+.pill .lg button{padding:8px 10px;font-size:12px;font-family:var(--m)}
+.pill .lg button[aria-pressed=true]{color:var(--ac)}
+#bg{display:none;width:40px;height:36px}
+#menu{position:fixed;inset:0;z-index:45;background:var(--ac);color:#0C0D10;display:flex;flex-direction:column;justify-content:center;padding:0 8vw;gap:4px;clip-path:circle(0 at calc(100% - 40px) 40px);transition:clip-path .7s cubic-bezier(.77,0,.18,1)}
+#menu.o{clip-path:circle(150% at calc(100% - 40px) 40px)}
+#menu a{font-size:clamp(44px,13vw,80px);font-weight:700;letter-spacing:-.03em;line-height:1.1;opacity:0;transform:translateY(30px);transition:.5s}
+#menu.o a{opacity:1;transform:none;transition-delay:calc(.25s + var(--i)*.07s)}
+/* hero */
+.hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;padding:120px 0 56px;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;animation:fl 14s ease-in-out infinite alternate}
+.b1{width:46vw;height:46vw;background:var(--ac);top:-15%;inset-inline-end:-10%}
+.b2{width:36vw;height:36vw;background:var(--bl);bottom:-20%;inset-inline-start:-8%;animation-delay:-6s;opacity:.22}
+@keyframes fl{to{transform:translate(6%,8%) scale(1.15)}}
+.grid{position:absolute;inset:0;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 12.5vh,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/12.5vw 100%;opacity:.35;mask:linear-gradient(#000,transparent 85%)}
+#orb{position:absolute;inset-inline-start:42%;top:12%;width:44vw;height:44vw;max-width:640px;max-height:640px;opacity:.9}
+[dir=rtl] #orb{inset-inline-start:auto;inset-inline-end:42%}
+.port{position:absolute;inset-inline-end:7vw;top:17vh;width:clamp(150px,22vw,330px);aspect-ratio:3/4;z-index:1;clip-path:inset(100% 0 0 0);transition:clip-path 1.2s .5s cubic-bezier(.77,0,.18,1)}
+body.go .port{clip-path:inset(0)}
+.port .fr{position:absolute;inset:0;background:var(--pn);border:1px solid var(--line);display:grid;place-items:center;font-size:90px;font-weight:700;color:var(--ac)}
+.port img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.05)}
+.port:after{content:"";position:absolute;inset:-10px 10px 10px -10px;border:1px solid var(--ac);z-index:-1}
+.hero .wrap{position:relative;z-index:2;width:100%}
+h1{font-size:clamp(54px,12.4vw,210px);font-weight:700;line-height:.9;letter-spacing:-.045em;margin-bottom:34px}
+[dir=rtl] h1{line-height:1.12;letter-spacing:0}
+.l{display:block;overflow:hidden;padding-bottom:.04em}
+.l>span{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d) + .5s)}
+body.go .l>span{transform:none}
+h1 .l:nth-child(2){-webkit-text-stroke:2px var(--ink);color:transparent}
+.meta{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end;border-top:1px solid var(--line);padding-top:22px}
+.meta p{max-width:46ch;color:var(--mut)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;gap:10px;padding:15px 26px;border-radius:999px;border:1px solid var(--ink);font-weight:500;transition:background .3s,color .3s,border .3s}
+.btn.m{background:var(--ac);border-color:var(--ac);color:#0C0D10}
+.btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn i{font-style:normal;transition:transform .3s}.btn:hover i{transform:translateX(5px)}[dir=rtl] .btn i{transform:scaleX(-1)}[dir=rtl] .btn:hover i{transform:scaleX(-1) translateX(5px)}
+.sc{position:absolute;bottom:20px;inset-inline-start:50%;z-index:2}
+.sc:after{content:"";display:block;width:1px;height:34px;margin:8px auto 0;background:var(--ac);animation:sd 1.6s infinite}
+@keyframes sd{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* ticker */
+.tk{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--bg)}
+.tk div{display:flex;gap:44px;width:max-content;animation:mq 30s linear infinite;font-size:clamp(22px,3.5vw,40px);font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.tk span:nth-child(even){color:var(--ac)}
+@keyframes mq{to{transform:translateX(-50%)}}[dir=rtl] .tk div{animation-name:mqr}@keyframes mqr{to{transform:translateX(50%)}}
+section{padding:clamp(80px,12vw,170px) 0;position:relative}
+h2{font-size:clamp(34px,6vw,84px);letter-spacing:-.04em;line-height:1;font-weight:700;margin-bottom:56px}
+[dir=rtl] h2{letter-spacing:0;line-height:1.2}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+/* work */
+.ch{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,5vw,80px);border-top:1px solid var(--line);padding:40px 0 70px}
+.st{position:sticky;top:110px;align-self:start}
+.st .n{font-size:clamp(90px,17vw,260px);font-weight:700;line-height:.85;letter-spacing:-.06em;-webkit-text-stroke:1.5px var(--ac);color:transparent;transition:color .5s}
+.ch:hover .n{color:var(--ac)}
+.st h3{font-size:clamp(24px,3vw,40px);margin-top:14px;letter-spacing:-.02em}
+.row{display:grid;gap:10px;padding:30px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .4s,opacity .4s}
+.rows:hover .row{opacity:.4}.rows .row:hover{opacity:1;padding-inline-start:22px}
+.row:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--ac);transform:scaleY(0);transition:transform .4s}.row:hover:before{transform:scaleY(1)}
+.row h4{font-size:clamp(24px,3.4vw,44px);letter-spacing:-.03em;line-height:1.1}
+.row p{color:var(--mut);max-width:52ch}
+.tg{display:flex;flex-wrap:wrap;gap:8px}.tg span{border:1px solid var(--line);border-radius:999px;padding:3px 12px;font:12px var(--m);transition:.3s}.row:hover .tg span{border-color:var(--ac);color:var(--ac)}
+.lk{font-weight:700;display:inline-flex;gap:8px;color:var(--ac)}.lk.off{color:var(--mut);pointer-events:none;font-weight:400}
+/* skills */
+#skills{background:var(--pn)}
+.sk{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,5vw,80px)}
+.sl{list-style:none}
+.sl button{width:100%;text-align:start;font-size:clamp(30px,5.4vw,76px);font-weight:700;letter-spacing:-.04em;line-height:1.12;padding:6px 0;opacity:.3;transition:opacity .3s,transform .4s,color .3s;border-bottom:1px solid var(--line)}
+[dir=rtl] .sl button{letter-spacing:0}
+.sl:hover button{opacity:.2}.sl button:hover,.sl button:focus-visible,.sl button.a{opacity:1;color:var(--ac);transform:translateX(18px)}[dir=rtl] .sl button:hover,[dir=rtl] .sl button.a{transform:translateX(-18px)}
+.sp{position:sticky;top:120px;align-self:start;border:1px solid var(--line);padding:28px;min-height:230px;background:var(--bg)}
+.sp b{display:block;font-size:56px;color:var(--ac);line-height:1;letter-spacing:-.04em;margin-bottom:14px}
+.sp p{font-size:20px}.sp .mono{margin-top:18px;color:var(--bl)}
+/* about */
+#about{padding-block:clamp(110px,16vw,220px)}
+#st{font-size:clamp(38px,8.4vw,128px);font-weight:700;letter-spacing:-.05em;line-height:.98}
+[dir=rtl] #st{letter-spacing:0;line-height:1.25}
+#st span{opacity:.15;transition:opacity .3s}#st span.k{opacity:1}
+.ab{display:flex;gap:30px;flex-wrap:wrap;justify-content:space-between;margin-top:50px;color:var(--mut);max-width:900px}
+/* process */
+.pr{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line)}
+.pr button{padding:clamp(18px,3vw,40px) 18px;text-align:start;border-inline-end:1px solid var(--line);font-size:clamp(18px,2.6vw,34px);font-weight:700;letter-spacing:-.03em;position:relative;overflow:hidden;transition:color .4s}
+.pr button:last-child{border:0}
+.pr button:before{content:"";position:absolute;inset:0;background:var(--ac);transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.pr button.a{color:#0C0D10}.pr button.a:before{transform:none}
+.pr .mono{display:block;margin-bottom:26px;color:inherit;opacity:.7}
+.pf{display:flex;justify-content:space-between;margin-top:20px}
+/* books */
+#books{overflow:hidden}
+.bs{display:flex;gap:clamp(30px,6vw,90px);overflow-x:auto;scroll-snap-type:x mandatory;padding:30px clamp(18px,4vw,48px) 60px;perspective:1400px;scrollbar-width:thin}
+.bk{flex:none;width:clamp(220px,24vw,300px);scroll-snap-align:center}
+.bd{aspect-ratio:2/3;transform:rotateY(-24deg);transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1);background:var(--ink);color:var(--bg);padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:24px 24px 50px #0006;position:relative;direction:ltr}
+.bd:before{content:"";position:absolute;inset-block:0;left:0;width:14px;background:#0003}
+.bk:hover .bd,.bk:focus-within .bd{transform:rotateY(-4deg) translateY(-10px)}
+.bd b{font-size:clamp(26px,3vw,38px);line-height:1;letter-spacing:-.04em}.bd i{font:12px var(--m);font-style:normal;color:var(--ac)}
+.bk:nth-child(2) .bd{background:var(--ac);color:#0C0D10}.bk:nth-child(2) .bd i{color:#0C0D10}.bk:nth-child(3) .bd{background:var(--bl);color:#0C0D10}.bk:nth-child(3) .bd i{color:#0C0D10}
+.bk .lk{margin-top:26px}
+/* contact */
+#contact{text-align:center;overflow:hidden}
+#contact h2{font-size:clamp(54px,13vw,220px);line-height:.9;margin:0 0 50px}
+#contact .btns{justify-content:center}
+footer{border-top:1px solid var(--line);padding:34px 0 44px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+footer nav{display:flex;gap:20px}footer a:hover{color:var(--ac)}
+@media(max-width:860px){.ch,.sk{grid-template-columns:1fr}.st,.sp{position:static}.pr{grid-template-columns:1fr}.pr button{border-inline-end:0;border-bottom:1px solid var(--line)}.pill .nv{display:none}#bg{display:block}.port{top:12vh;opacity:.9}.sc{display:none}#orb{opacity:.5}}
+@media(prefers-reduced-motion:reduce){*,:before,:after{animation:none!important;transition:none!important}.l>span{transform:none}.port{clip-path:none}.rv{opacity:1;transform:none}#st span{opacity:1}#pre{display:none}}
+</style>
+</head>
+<body>
+<div id="pre"><b>SELLAM</b><b>ABDELMOULA</b><div class="mono"><span>01 DIGITAL</span><span>02 CREATIVE</span><span>03 BUILD</span></div></div>
+<div id="cur" aria-hidden="true"></div><div id="prog"></div>
+<header><div class="pill">
+ <a class="nv" href="#work" data-i="n1"></a><a class="nv" href="#skills" data-i="n2"></a><a class="nv" href="#books" data-i="n3"></a><a class="nv" href="#contact" data-i="n4"></a>
+ <span class="lg" role="group" aria-label="Language"><button data-l="ar">AR</button><button data-l="en">EN</button><button data-l="fr">FR</button></span>
+ <button id="th" aria-label="Theme">◐</button><button id="bg" aria-label="Menu" aria-expanded="false">☰</button>
+</div></header>
+<nav id="menu" aria-label="Menu"><a href="#work" style="--i:0" data-i="n1"></a><a href="#skills" style="--i:1" data-i="n2"></a><a href="#books" style="--i:2" data-i="n3"></a><a href="#contact" style="--i:3" data-i="n4"></a></nav>
+
+<main>
+<section class="hero" style="padding-block:120px 56px">
+ <div class="blob b1"></div><div class="blob b2"></div><div class="grid"></div><canvas id="orb" aria-hidden="true"></canvas>
+ <div class="port" id="port"><div class="fr">SA</div><img src="abdelmoula.png" alt="Sellam Abdelmoula" onerror="this.remove()"></div>
+ <div class="wrap" id="hc">
+  <h1 data-i="h1" data-ln></h1>
+  <div class="meta"><div><div class="mono">Web Developer &amp; Digital Projects Creator — Algeria</div><p data-i="sub"></p></div>
+   <div class="btns"><a class="btn m mag" href="#work" data-c="GO"><span data-i="c1"></span><i>→</i></a><a class="btn mag" href="#contact" data-c="HI"><span data-i="c2"></span><i>→</i></a></div></div>
+ </div>
+ <div class="sc mono" data-i="sc"></div>
+</section>
+<div class="tk" aria-hidden="true"><div id="tk"></div></div>
+
+<section id="work"><div class="wrap">
+ <h2 class="rv" data-i="hw"></h2>
+ <div class="ch"><div class="st"><div class="n">01</div><h3 data-i="cw"></h3><div class="mono">02 <span data-i="pj"></span></div></div><div class="rows">
+  <div class="row"><h4>Next.js Blog</h4><p data-i="p1"></p><div class="tg"><span>Next.js</span><span>React</span></div><a class="lk" data-k="blog"></a></div>
+  <div class="row"><h4>Full-stack</h4><p data-i="p2"></p><div class="tg"><span>REST</span><span>JSON</span><span>Firebase</span><span>APIs</span></div><a class="lk" data-k="github"></a></div></div></div>
+ <div class="ch"><div class="st"><div class="n">02</div><h3 data-i="ca"></h3><div class="mono">02 <span data-i="pj"></span></div></div><div class="rows">
+  <div class="row"><h4>Quran Reader</h4><p data-i="p3"></p><div class="tg"><span>Offline</span><span>Hafs</span><span>Warsh</span></div><a class="lk" data-k="quran"></a></div>
+  <div class="row"><h4>Hassoun Diagnosis</h4><p data-i="p4"></p><div class="tg"><span>Mobile</span></div><a class="lk" data-k="hassoun"></a></div></div></div>
+ <div class="ch"><div class="st"><div class="n">03</div><h3 data-i="cd"></h3><div class="mono">01 <span data-i="pj"></span></div></div><div class="rows">
+  <div class="row"><h4>Canva Templates</h4><p data-i="p5"></p><div class="tg"><span>Canva</span></div><a class="lk" data-k="canva"></a></div></div></div>
+</div></section>
+
+<section id="skills"><div class="wrap"><h2 class="rv" data-i="hs"></h2>
+ <div class="sk"><ul class="sl" id="sl"></ul><div class="sp" aria-live="polite"><b id="sn">01</b><p id="sd"></p><div class="mono" id="stg"></div></div></div>
+</div></section>
+
+<section id="about"><div class="wrap"><div id="st"></div><div class="ab"><span data-i="a2"></span></div></div></section>
+
+<section id="process"><div class="wrap"><h2 class="rv" data-i="hp"></h2>
+ <div class="pr" id="pr"><button data-s="0"><span class="mono">01</span><span data-i="s1"></span></button><button data-s="1"><span class="mono">02</span><span data-i="s2"></span></button><button data-s="2"><span class="mono">03</span><span data-i="s3"></span></button><button data-s="3"><span class="mono">04</span><span data-i="s4"></span></button><button data-s="4"><span class="mono">05</span><span data-i="s5"></span></button></div>
+ <div class="pf mono"><span data-i="pf1"></span><span data-i="pf2"></span></div>
+</div></section>
+
+<section id="books"><div class="wrap"><h2 class="rv" data-i="hb"></h2><p class="mono" data-i="bn"></p></div>
+ <div class="bs">
+  <div class="bk"><div class="bd"><i>KINDLE · PAPERBACK</i><b>Financial Literacy for Teens</b><i>KDP</i></div><a class="lk" data-k="fl"></a></div>
+  <div class="bk"><div class="bd"><i>KINDLE · PAPERBACK</i><b>ADHD Workbook</b><i>KDP</i></div><a class="lk" data-k="adhd"></a></div>
+  <div class="bk"><div class="bd"><i>KINDLE · PAPERBACK</i><b>Cybersecurity Foundations</b><i>KDP</i></div><a class="lk" data-k="cyber"></a></div>
+ </div></section>
+
+<section id="contact"><div class="wrap"><h2 data-i="hc" data-ln></h2>
+ <div class="btns"><button class="btn m mag" id="cp" data-c="COPY"><span id="cpt"></span><i>⧉</i></button>
+  <a class="btn mag" href="https://wa.me/213541364416" target="_blank" rel="noopener" data-c="OPEN">WhatsApp <i>↗</i></a>
+  <a class="btn mag" href="https://github.com/Moula16" target="_blank" rel="noopener" data-c="OPEN">GitHub <i>↗</i></a></div>
+ <p class="mono" style="margin-top:26px">sellamabdelmoula@gmail.com</p></div></section>
+</main>
+<footer><div class="wrap"><div><b>Sellam Abdelmoula</b><div class="mono" data-i="ft"></div></div>
+ <nav class="mono"><a href="#work" data-i="n1"></a><a href="#skills" data-i="n2"></a><a href="#books" data-i="n3"></a><a href="mailto:sellamabdelmoula@gmail.com">Email</a></nav><div class="mono">© 2026</div></div></footer>
+
+<script>
+/* Fill your links ("" = shown as "soon") */
+const LINKS={blog:"",github:"https://github.com/Moula16",quran:"",hassoun:"",canva:"",fl:"",adhd:"",cyber:""};
+const EMAIL="sellamabdelmoula@gmail.com";
+const T={
+en:{n1:"Work",n2:"Skills",n3:"Books",n4:"Contact",h1:"I build|digital|things that|work.",sub:"Web developer and digital projects creator from Algeria. Websites, offline apps, e-books and templates. Always learning something new.",c1:"See the work",c2:"Say hello",sc:"SCROLL",hw:"Selected work",cw:"Web",ca:"Apps",cd:"Digital products",pj:"projects",p1:"A modern blog built with Next.js.",p2:"Front-end, back-end, REST APIs, JSON and Firebase, from a 6-month web developer training and personal experiments.",p3:"Offline Quran reader with Hafs and Warsh readings. The screen stays on while reading.",p4:"An app that helps diagnose goldfinch (Hassoun) diseases.",p5:"Ready-made Canva templates.",op:"Open project",so:"Link coming soon",am:"View on Amazon",hs:"Capabilities",bg:"Beginner",d1:"Full-stack: front-end, back-end, APIs and modern interfaces.",d2:"E-books of all kinds and ready-to-use Canva templates.",d3:"Scripts and workflows that remove repetitive work.",d4:"Professional image editing and visual design.",d5:"Beginner level, learning the foundations step by step.",d6:"Hands-on experience across many IT areas.",d7:"Simple, fast mobile apps with a clear user experience.",k:["Web Development","Digital Products","Automation","Photoshop Pro","Cybersecurity","IT","App Developer"],a1:"I like turning problems into something useful.",a2:"6 months of full-stack training. Apps that work offline. Books published on Amazon KDP.",hp:"From idea to solution",s1:"Input",s2:"Think",s3:"Build",s4:"Test",s5:"Ship",pf1:"IDEA → PROBLEM",pf2:"EXPERIMENT → SOLUTION",hb:"Digital publishing",bn:"English books published on Amazon KDP, in Kindle and Paperback. Covers shown here are typographic placeholders.",hc:"Let's|build|something|useful.",cp:"Copy email",cd2:"Copied!",ft:"Based in Algeria"},
+fr:{n1:"Projets",n2:"Compétences",n3:"Livres",n4:"Contact",h1:"Je crée|des outils|numériques|utiles.",sub:"Développeur web et créateur de projets numériques, basé en Algérie. Sites, applications hors-ligne, livres numériques et modèles. J'apprends toujours quelque chose de nouveau.",c1:"Voir les projets",c2:"Me contacter",sc:"DÉFILER",hw:"Projets choisis",cw:"Web",ca:"Applications",cd:"Produits numériques",pj:"projets",p1:"Un blog moderne construit avec Next.js.",p2:"Front-end, back-end, API REST, JSON et Firebase, issus d'une formation de 6 mois en développement web et d'expériences personnelles.",p3:"Lecteur du Coran hors-ligne avec les lectures Hafs et Warsh. L'écran reste allumé pendant la lecture.",p4:"Une application d'aide au diagnostic des maladies du chardonneret (Hassoun).",p5:"Modèles Canva prêts à l'emploi.",op:"Voir le projet",so:"Lien bientôt disponible",am:"Voir sur Amazon",hs:"Compétences",bg:"Débutant",d1:"Full-stack : front-end, back-end, API et interfaces modernes.",d2:"Livres numériques de tous types et modèles Canva prêts à l'emploi.",d3:"Scripts et workflows qui suppriment les tâches répétitives.",d4:"Retouche d'image professionnelle et design visuel.",d5:"Niveau débutant, j'apprends les bases étape par étape.",d6:"Expérience pratique dans de nombreux domaines de l'IT.",d7:"Applications mobiles simples et rapides, à l'usage clair.",k:["Développement Web","Produits numériques","Automatisation","Photoshop Pro","Cybersécurité","IT","Développeur d'apps"],a1:"J'aime transformer les problèmes en quelque chose d'utile.",a2:"6 mois de formation full-stack. Des applications qui fonctionnent hors-ligne. Des livres publiés sur Amazon KDP.",hp:"De l'idée à la solution",s1:"Entrée",s2:"Réflexion",s3:"Création",s4:"Test",s5:"Mise en ligne",pf1:"IDÉE → PROBLÈME",pf2:"EXPÉRIENCE → SOLUTION",hb:"Édition numérique",bn:"Livres en anglais publiés sur Amazon KDP, en Kindle et broché. Les couvertures affichées sont des visuels typographiques provisoires.",hc:"Construisons|quelque chose|d'utile.|",cp:"Copier l'e-mail",cd2:"Copié !",ft:"Basé en Algérie"},
+ar:{n1:"أعمالي",n2:"المهارات",n3:"الكتب",n4:"تواصل",h1:"أبني|أشياء|رقمية|تعمل.",sub:"مطوّر ويب ومنشئ مشاريع رقمية من الجزائر. مواقع وتطبيقات تعمل دون إنترنت وكتب إلكترونية وقوالب. أتعلم دائمًا شيئًا جديدًا.",c1:"شاهد الأعمال",c2:"تواصل معي",sc:"مرّر",hw:"أعمال مختارة",cw:"ويب",ca:"تطبيقات",cd:"منتجات رقمية",pj:"مشاريع",p1:"مدونة حديثة مبنية بـ Next.js.",p2:"Front-end وBack-end وREST APIs وJSON وFirebase، من تكوين 6 أشهر في تطوير الويب وتجارب شخصية.",p3:"قارئ قرآن يعمل دون إنترنت بروايتي حفص وورش. تبقى الشاشة مضاءة أثناء القراءة.",p4:"تطبيق يساعد على تشخيص أمراض طائر الحسّون.",p5:"قوالب Canva جاهزة.",op:"عرض المشروع",so:"الرابط قريبًا",am:"عرض على أمازون",hs:"القدرات",bg:"مبتدئ",d1:"تطوير متكامل: واجهات أمامية وخلفية وAPIs وتصميمات حديثة.",d2:"كتب إلكترونية بكل أنواعها وقوالب Canva جاهزة.",d3:"سكربتات وتدفقات عمل تلغي المهام المتكررة.",d4:"تعديل صور احترافي وتصميم بصري.",d5:"مستوى مبتدئ، أتعلم الأساسيات خطوة بخطوة.",d6:"خبرة عملية في مجالات كثيرة من تكنولوجيا المعلومات.",d7:"تطبيقات جوال بسيطة وسريعة بتجربة استخدام واضحة.",k:["تطوير الويب","منتجات رقمية","الأتمتة","فوتوشوب احترافي","الأمن السيبراني","تقنية المعلومات","تطوير التطبيقات"],a1:"أحب تحويل المشكلات إلى شيء مفيد.",a2:"6 أشهر من التكوين المتكامل. تطبيقات تعمل دون إنترنت. كتب منشورة على Amazon KDP.",hp:"من الفكرة إلى الحل",s1:"المدخلات",s2:"التفكير",s3:"البناء",s4:"الاختبار",s5:"النشر",pf1:"فكرة ← مشكلة",pf2:"تجربة ← حل",hb:"النشر الرقمي",bn:"كتب بالإنجليزية منشورة على Amazon KDP بصيغتي Kindle وPaperback. الأغلفة المعروضة هنا نماذج نصية مؤقتة.",hc:"لنبنِ|شيئًا|مفيدًا|معًا.",cp:"انسخ البريد",cd2:"تم النسخ!",ft:"من الجزائر"}};
+const TAGS={1:"Next.js · APIs · REST · JSON · Firebase",2:"Amazon KDP · Kindle · Paperback · Canva",4:"Photoshop",5:"@",7:"Quran Reader · Hassoun"};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],root=document.documentElement;
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches,FINE=matchMedia("(pointer:fine)").matches;
+let L="en",skI=0;
+function setLang(l){L=l;const t=T[l];root.lang=l;root.dir=l==="ar"?"rtl":"ltr";
+ $$("[data-i]").forEach(e=>{const v=t[e.dataset.i];if("ln"in e.dataset)e.innerHTML=v.split("|").filter(Boolean).map((x,i)=>`<span class="l"><span style="--d:${i*.1}s">${x}</span></span>`).join("");else e.textContent=v});
+ $$(".lg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+ $("#sl").innerHTML=t.k.map((k,i)=>`<li><button data-k="${i}">${k}</button></li>`).join("");
+ $$("#sl button").forEach(b=>{b.onmouseenter=b.onfocus=()=>skill(+b.dataset.k)});skill(skI);
+ const tk=t.k.concat(t.k).map(k=>`<span>${k}</span><span>✦</span>`).join("");$("#tk").innerHTML=tk+tk;
+ $("#st").innerHTML=t.a1.split(" ").map(w=>`<span>${w}</span>`).join(" ");
+ $$("a[data-k]").forEach(a=>{const u=LINKS[a.dataset.k],bk=a.closest(".bk");if(u){a.href=u;a.target="_blank";a.rel="noopener";a.classList.remove("off");a.dataset.c="OPEN";a.textContent=(bk?t.am:t.op)+" ↗"}else{a.removeAttribute("href");a.classList.add("off");a.dataset.c="SOON";a.textContent=t.so}});
+ $("#cpt").textContent=t.cp;try{localStorage.setItem("lang",l)}catch(e){}scrollFx()}
+function skill(i){skI=i;$$("#sl button").forEach((b,j)=>b.classList.toggle("a",j===i));$("#sn").textContent="0"+(i+1);$("#sd").textContent=T[L]["d"+(i+1)];const g=TAGS[i+1]||"";$("#stg").textContent=g==="@"?T[L].bg:g}
+$$(".lg button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+$("#th").onclick=()=>{const d=root.dataset.theme==="dark"?"light":"dark";root.dataset.theme=d;try{localStorage.setItem("theme",d)}catch(e){}};
+const mb=$("#bg"),mn=$("#menu");mb.onclick=()=>{const o=mn.classList.toggle("o");mb.setAttribute("aria-expanded",o);mb.textContent=o?"✕":"☰"};
+$$("#menu a").forEach(a=>a.onclick=()=>{mn.classList.remove("o");mb.textContent="☰"});
+$("#cp").onclick=async()=>{try{await navigator.clipboard.writeText(EMAIL)}catch(e){location.href="mailto:"+EMAIL}$("#cpt").textContent=T[L].cd2;setTimeout(()=>$("#cpt").textContent=T[L].cp,1600)};
+/* process */
+let ps=0;const pb=$$("#pr button");const pset=i=>{ps=i;pb.forEach((b,j)=>b.classList.toggle("a",j<=i))};pb.forEach((b,i)=>{b.onclick=b.onmouseenter=()=>pset(i)});pset(0);
+let pt;new IntersectionObserver(e=>{if(e[0].isIntersecting&&!RM){clearInterval(pt);pt=setInterval(()=>pset((ps+1)%5),1400)}else clearInterval(pt)}).observe($("#pr"));
+/* reveal + active nav */
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.15});$$(".rv,.row,.bk").forEach(e=>{e.classList.add("rv");io.observe(e)});
+const nio=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)$$(".pill .nv").forEach(a=>a.classList.toggle("act",a.getAttribute("href")==="#"+x.target.id))}),{rootMargin:"-45% 0px -50% 0px"});["work","skills","books","contact"].forEach(id=>nio.observe(document.getElementById(id)));
+/* scroll fx */
+let tick=0;function scrollFx(){const y=scrollY,h=document.body.scrollHeight-innerHeight;$("#prog").style.transform=`scaleX(${y/h||0})`;
+ const hh=innerHeight;if(y<hh*1.2&&!RM){const p=y/hh;$("#hc").style.transform=`translateY(${p*90}px)`;$("#hc").style.opacity=1-p*.9;$("#port").style.translate=`0 ${-p*60}px`}
+ const a=$("#st"),r=a.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(r.height+innerHeight*.3))),w=a.children,n=w.length;for(let i=0;i<n;i++)w[i].classList.toggle("k",RM||i/n<p+.02);tick=0}
+addEventListener("scroll",()=>{if(!tick)tick=requestAnimationFrame(scrollFx)},{passive:true});
+/* pointer: cursor, magnet, parallax */
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my,nx=0,ny=0;
+addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY;nx=mx/innerWidth-.5;ny=my/innerHeight-.5;
+ if(FINE){const t=e.target.closest("[data-c],a,button"),c=$("#cur");if(t){c.classList.add("on");c.textContent=t.dataset.c||(t.matches("a,button")?"•":"")}else{c.classList.remove("on");c.textContent=""}}
+ $$(".mag").forEach(m=>{const b=m.getBoundingClientRect(),dx=mx-(b.left+b.width/2),dy=my-(b.top+b.height/2),d=Math.hypot(dx,dy);m.style.transform=d<110?`translate(${dx*.25}px,${dy*.35}px)`:""})});
+/* orb: light canvas point sphere */
+const cv=$("#orb"),g=cv.getContext("2d"),P=[];for(let i=0;i<260;i++){const u=Math.acos(1-2*(i+.5)/260),v=Math.PI*(1+Math.sqrt(5))*i;P.push([Math.sin(u)*Math.cos(v),Math.cos(u),Math.sin(u)*Math.sin(v)])}
+let rot=0,vis=true;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(cv);
+function frame(){requestAnimationFrame(frame);cx+=(mx-cx)*.12;cy+=(my-cy)*.12;
+ if(FINE){$("#cur").style.transform=`translate(${cx}px,${cy}px)`}
+ if(!vis||RM)return;const s=cv.clientWidth,d=Math.min(devicePixelRatio,1.5);if(cv.width!==s*d){cv.width=cv.height=s*d}
+ g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,s,s);rot+=.003;const ry=rot+nx*1.2,rx=ny*.9,ac=getComputedStyle(root).getPropertyValue("--ac").trim(),ink=getComputedStyle(root).getPropertyValue("--ink").trim();
+ for(const p of P){let x=p[0]*Math.cos(ry)+p[2]*Math.sin(ry),z=-p[0]*Math.sin(ry)+p[2]*Math.cos(ry),y=p[1]*Math.cos(rx)-z*Math.sin(rx);z=p[1]*Math.sin(rx)+z*Math.cos(rx);
+  const k=(z+1.4)/2.4;g.globalAlpha=.15+.7*k;g.fillStyle=z>.55?ac:ink;g.beginPath();g.arc(s/2+x*s*.42,s/2+y*s*.42,1+1.8*k,0,6.3);g.fill()}}
+/* init */
+let sl,st;try{sl=localStorage.getItem("lang");st=localStorage.getItem("theme")}catch(e){}
+if(st)root.dataset.theme=st;else if(matchMedia("(prefers-color-scheme:light)").matches)root.dataset.theme="light";
+setLang(sl||(T[(navigator.language||"en").slice(0,2)]?(navigator.language||"en").slice(0,2):"en"));
+frame();
+const go=()=>{document.body.classList.add("ready");setTimeout(()=>document.body.classList.add("go"),RM?0:150)};
+RM?go():setTimeout(go,1300);
+</script>
+</body>
+</html>
